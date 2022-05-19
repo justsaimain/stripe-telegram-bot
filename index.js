@@ -181,12 +181,13 @@ app.post(URI, async (req, res) => {
   res.send();
 });
 
-app.listen(process.env.PORT || 5000, async () => {
-  console.log("App is running on port " + process.env.PORT || 5000);
-  // await deleteWebHook();
-  await init();
-  await mongoose
-    .connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => {})
-    .catch((e) => {});
-});
+mongoose
+  .connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(function () {
+    app.listen(process.env.PORT || 5000, async () => {
+      console.log("App is running on port " + process.env.PORT || 5000);
+      // await deleteWebHook();
+      await init();
+    });
+  })
+  .catch((err) => console.log(err));
