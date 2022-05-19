@@ -152,7 +152,7 @@ app.post(URI, async (req, res) => {
     const token = splitText[1];
     const findToken = await TokenModel.findOne({ token: token });
     if (findToken) {
-      const updateLimit = findToken.data?.limit - 1;
+      const updateLimit = findToken.data.limit - 1;
       TokenModel.update({
         token: token,
         limit: updateLimit,
